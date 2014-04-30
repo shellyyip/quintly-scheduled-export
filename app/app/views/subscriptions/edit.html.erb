@@ -1,28 +1,5 @@
 <h1>Edit Subscription</h1>
 
-<%= form_for :subscription, url: subscriptions_path(@subscription), method: :patch do |f| %>
-
-	<% if @subscription.errors.any? %>
-		<div class="error-explanation">
-	    <h2><%= pluralize(@subscription.errors.count, "error") %> prohibited
-	      this article from being saved:</h2>
-	    <ul>
-	    <% @subscription.errors.full_messages.each do |msg| %>
-	      <li><%= msg %></li>
-	    <% end %>
-    </ul>
-  </div>
-	<% end %>
-
-  <p>
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </p>
- 
-  <p>
-    <%= f.submit %>
-  </p>
+<%= render 'form' %>
   
-  <%= link_to 'Back to All Subscriptions', subscriptions_path %>
-  
-<% end %>
+<%= link_to 'Back to All Subscriptions', subscriptions_path %>

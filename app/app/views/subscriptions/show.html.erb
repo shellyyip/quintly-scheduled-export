@@ -1,5 +1,8 @@
+<h1>Your subscription:</h1>
 <p>
   <strong>Email</strong>
   <%= @subscription.email %>
-  <%= link_to 'Edit', edit_subscription_path(@subscription) %>
 </p>
+<p><%= link_to 'Edit', edit_subscription_path(@subscription) %></p>
+<p><%= link_to 'Back to All Subscriptions', subscriptions_path %></p>
+

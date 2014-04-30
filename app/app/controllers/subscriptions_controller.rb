@@ -15,7 +15,7 @@ class SubscriptionsController < ApplicationController
   def create
     @subscription = Subscription.new(subscription_params)
     if @subscription.save #if subscription input validated
-      @subscription.save
+      redirect_to @subscription
     else
       render 'new'
     end
@@ -32,6 +32,12 @@ class SubscriptionsController < ApplicationController
     else
       render 'edit'
     end  
+  end
+  
+  def destroy
+    @subscription = Subscription.find(params[:id])
+    @subscription.destroy
+    redirect_to subscriptions_path
   end
   
   private

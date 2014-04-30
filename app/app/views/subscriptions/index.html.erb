@@ -10,7 +10,10 @@
   <% @subscriptions.each do |subscription| %>
     <tr>
       <td><%= subscription.email %></td>
+      <td><%= link_to 'Show', subscription_path(subscription) %></td>
       <td><%= link_to 'Edit', edit_subscription_path(subscription) %></td>
+      <td><%= link_to 'Destroy', subscription_path(subscription),
+                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </table>
