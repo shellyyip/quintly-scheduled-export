@@ -1,0 +1,16 @@
+<h1>All Subscriptions</h1>
+
+<p><%= link_to 'Add new subscription', new_subscription_path %></p>
+ 
+<table>
+  <tr>
+    <th>Email</th>
+  </tr>
+ 
+  <% @subscriptions.each do |subscription| %>
+    <tr>
+      <td><%= subscription.email %></td>
+      <td><%= link_to 'Edit', edit_subscription_path(subscription) %></td>
+    </tr>
+  <% end %>
+</table>
