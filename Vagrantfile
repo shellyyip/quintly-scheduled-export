@@ -3,8 +3,13 @@
 
 $script = <<SCRIPT
     echo Provisioning...
+    sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password root'
+	sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password root'
     sudo apt-get update -y
     sudo apt-get install curl -y
+    sudo apt-get install mysql -y
+    sudo apt-get install mysql-server-5.5 -y
+    sudo apt-get install libmysqlclient-dev ruby-dev -y
     sudo apt-get install nodejs -y
     sudo apt-get install npm -y
     \\curl -L https://get.rvm.io | bash -s stable
@@ -16,6 +21,7 @@ $script = <<SCRIPT
     rvm rubygems current
     gem install rails
     gem install bundler
+    gem install mysql
     echo Done provisioning!
 SCRIPT
 

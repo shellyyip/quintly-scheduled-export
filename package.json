@@ -1,0 +1,10 @@
+{
+	"name": "@TODO_PROJECTNAME",
+	"version": "0.1.0",
+	"devDependencies": {
+		"grunt": "",
+		"grunt-contrib-sass": "",
+		"grunt-contrib-watch": "",
+		"grunt-autoprefixer": ""
+	}
+}
