@@ -15,6 +15,7 @@ ActiveRecord::Schema.define(version: 20140430152911) do
 
   create_table "subscriptions", force: true do |t|
     t.string   "email"
+    t.string   "cron"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
