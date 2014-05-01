@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140430152911) do
+ActiveRecord::Schema.define(version: 20140501162408) do
 
   create_table "subscriptions", force: true do |t|
     t.string   "email"
+    t.string   "vendor",     null: false
     t.string   "cron"
     t.datetime "created_at"
     t.datetime "updated_at"

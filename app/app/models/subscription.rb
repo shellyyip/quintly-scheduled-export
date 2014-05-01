@@ -9,4 +9,6 @@ end
 class Subscription < ActiveRecord::Base
   validates :email, presence: true, email: true
   validates :cron, presence: true
+  
+  scope :quintly, where (vendor: 'Quintly')
 end
