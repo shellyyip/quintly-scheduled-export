@@ -11,7 +11,7 @@ class SubscriptionsController < ApplicationController
       name: @subscription.vendor+'Worker_'+@subscription.id.to_s, 
       cron: @subscription.cron, 
       klass: @subscription.vendor+'Worker',
-      args: [@subscription.id, @subscription.quintly_metric]
+      args: [@subscription.id]
     )
   end
   

@@ -13,10 +13,3 @@ class Subscription < ActiveRecord::Base
     
   scope :quintly, -> { where(vendor: 'Quintly') }
 end
-
-class QuintlyWorker
-  include Sidekiq::Worker  
-  def perform(id)
-    puts '****************** RUNNING QUINTLY TASK NUMBER '+id.to_s
-  end
-end
