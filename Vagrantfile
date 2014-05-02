@@ -6,6 +6,7 @@ $script = <<SCRIPT
     sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password password root'
 	sudo debconf-set-selections <<< 'mysql-server-5.5 mysql-server/root_password_again password root'
     sudo apt-get update -y
+    sudo apt-get install redis-server -y
     sudo apt-get install curl -y
     sudo apt-get install mysql -y
     sudo apt-get install mysql-server-5.5 -y
