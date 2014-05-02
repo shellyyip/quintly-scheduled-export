@@ -6,9 +6,21 @@ class EmailValidator < ActiveModel::EachValidator
   end
 end
 
+class QuintlyJob
+  def perform
+    puts '******************* QUINTLY PERFORM'
+  end
+  handle_asynchronously :perform, :run_at => Proc.new {10.seconds.from_now}
+end
+
 class Subscription < ActiveRecord::Base
   validates :email, presence: true, email: true
-  validates :cron, presence: true
+  validates :vendor, presence: true
+  validates :frequency, presence: true
   
-  scope :quintly, where (vendor: 'Quintly')
+  def do_job
+    puts '**************** MODEL DO_JOB METHOD'
+  end
+    
+  scope :quintly, -> { where(vendor: 'Quintly') }
 end

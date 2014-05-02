@@ -14,7 +14,17 @@
 
   <p>
     <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.email_field :email %>
+  </p>
+  
+  <p>
+    <%= f.label :vendor %><br>
+    <%= f.select :vendor, ['Quintly'] %>
+  </p>
+  
+  <p>
+    <%= f.label :frequency %><br>
+    <%= f.select :frequency, ['DEBUG Every Minute', 'Daily', 'Weekly', 'Monthly'] %>
   </p>
   
   <p>

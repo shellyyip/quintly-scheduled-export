@@ -5,11 +5,13 @@
 <table>
   <tr>
     <th>Email</th>
+    <th>Vendor</th>
   </tr>
  
   <% @subscriptions.each do |subscription| %>
     <tr>
       <td><%= subscription.email %></td>
+      <td><%= subscription.vendor %></td>
       <td><%= link_to 'Show', subscription_path(subscription) %></td>
       <td><%= link_to 'Edit', edit_subscription_path(subscription) %></td>
       <td><%= link_to 'Destroy', subscription_path(subscription),

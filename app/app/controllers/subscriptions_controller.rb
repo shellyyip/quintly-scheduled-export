@@ -2,6 +2,7 @@ class SubscriptionsController < ApplicationController
   
   def index
     @subscriptions = Subscription.all
+    @quintly_subs = Subscription.quintly
   end
   
   def show 
@@ -14,7 +15,7 @@ class SubscriptionsController < ApplicationController
   
   def create
     @subscription = Subscription.new(subscription_params)
-    if @subscription.save #if subscription input validated
+    if @subscription.save #if subscription input validated 
       redirect_to @subscription
     else
       render 'new'
@@ -42,7 +43,7 @@ class SubscriptionsController < ApplicationController
   
   private
     def subscription_params
-      params.require(:subscription).permit(:email, :cron)
+      params.require(:subscription).permit(:email, :vendor, :frequency, :cron)
     end
   
 end

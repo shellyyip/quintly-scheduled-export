@@ -3,6 +3,14 @@
   <strong>Email</strong>
   <%= @subscription.email %>
 </p>
+<p>
+  <strong>Vendor</strong>
+  <%= @subscription.vendor %>
+</p>
+<p>
+  <strong>Cron Schedule</strong>
+  <%= @subscription.cron %>
+</p>
 <p><%= link_to 'Edit', edit_subscription_path(@subscription) %></p>
 <p><%= link_to 'Back to All Subscriptions', subscriptions_path %></p>
 
