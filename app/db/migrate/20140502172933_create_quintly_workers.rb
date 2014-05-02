@@ -10,5 +10,6 @@ class CreateQuintlyWorkers < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :quintly_workers, :subscription_id
   end
 end

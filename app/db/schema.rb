@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(version: 20140502172933) do
     t.datetime "updated_at"
   end
 
+  add_index "quintly_workers", ["subscription_id"], name: "index_quintly_workers_on_subscription_id", using: :btree
+
   create_table "subscriptions", force: true do |t|
     t.string   "email"
     t.string   "vendor",     null: false

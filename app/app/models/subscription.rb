@@ -7,6 +7,8 @@ class EmailValidator < ActiveModel::EachValidator
 end
 
 class Subscription < ActiveRecord::Base
+  has_one :quintly_worker
+  
   validates :email, presence: true, email: true
   validates :vendor, presence: true
   validates :frequency, presence: true

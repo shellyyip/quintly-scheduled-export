@@ -7,12 +7,12 @@ class SubscriptionsController < ApplicationController
   
   def show 
     @subscription = Subscription.find(params[:id])
-    Sidekiq::Cron::Job.create( 
-      name: @subscription.vendor+'Worker_'+@subscription.id.to_s, 
-      cron: @subscription.cron, 
-      klass: @subscription.vendor+'Worker',
-      args: [@subscription.id]
-    )
+    # Sidekiq::Cron::Job.create( 
+      # name: @subscription.email+'_'+@subscription.vendor+'Worker_'+@subscription.id.to_s, 
+      # cron: @subscription.cron, 
+      # klass: @subscription.vendor+'Worker',
+      # args: [@subscription.id]
+    # )
   end
   
   def new
@@ -22,6 +22,7 @@ class SubscriptionsController < ApplicationController
   def create
     @subscription = Subscription.new(subscription_params)
     if @subscription.save #if subscription input validated 
+      @subscription.create_quintly_worker(cron: @subscription.cron)
       redirect_to @subscription
     else
       render 'new'

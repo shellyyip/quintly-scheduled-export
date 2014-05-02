@@ -13,18 +13,18 @@
 	<% end %>
 
   <p>
-    <%= f.label :email %><br>
+    Email: <br>
     <%= f.email_field :email %>
+  </p>
+  
+  <p>
+    Frequency: <br>
+    <%= f.select :frequency, ['DEBUG Every Minute', 'Daily', 'Weekly', 'Monthly'] %>
   </p>
   
   <p>
     <%= f.label :vendor %><br>
     <%= f.select :vendor, ['Quintly'] %>
-  </p>
-  
-  <p>
-    <%= f.label :frequency %><br>
-    <%= f.select :frequency, ['DEBUG Every Minute', 'Daily', 'Weekly', 'Monthly'] %>
   </p>
   
   <p>
