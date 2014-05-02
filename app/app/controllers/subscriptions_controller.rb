@@ -6,6 +6,9 @@ class SubscriptionsController < ApplicationController
   end
   
   def show 
+    quintly_job = QuintlyJob.new
+    quintly_job.justprint
+    quintly_job.perform
     @subscription = Subscription.find(params[:id])
   end
   

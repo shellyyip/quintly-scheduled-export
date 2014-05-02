@@ -6,13 +6,6 @@ class EmailValidator < ActiveModel::EachValidator
   end
 end
 
-class QuintlyJob
-  def perform
-    puts '******************* QUINTLY PERFORM'
-  end
-  handle_asynchronously :perform, :run_at => Proc.new {10.seconds.from_now}
-end
-
 class Subscription < ActiveRecord::Base
   validates :email, presence: true, email: true
   validates :vendor, presence: true
