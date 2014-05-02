@@ -23,15 +23,15 @@
   </p>
   
   <p>
-    <%= f.label :vendor %><br>
-    <%= f.select :vendor, ['Quintly'] %>
-  </p>
-  
-  <p>
     <%= f.label :cron %><br>
     <%= f.text_field :cron %>
   </p>
- 
+  
+  <p>
+    <%= f.label :vendor %><br>
+    <%= f.select :vendor, ['Quintly', 'TESTING: NOT QUINTLY'] %>
+  </p>
+  
   <p>
     <%= f.submit %>
   </p>

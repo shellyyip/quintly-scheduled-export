@@ -22,7 +22,9 @@ class SubscriptionsController < ApplicationController
   def create
     @subscription = Subscription.new(subscription_params)
     if @subscription.save #if subscription input validated 
-      @subscription.create_quintly_worker(cron: @subscription.cron)
+       if @subscription.vendor == 'Quintly'
+          @subscription.create_quintly_worker(cron: @subscription.cron)
+       end
       redirect_to @subscription
     else
       render 'new'
