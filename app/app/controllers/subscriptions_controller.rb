@@ -6,8 +6,13 @@ class SubscriptionsController < ApplicationController
   end
   
   def show 
-    QuintlyWorker.perform_async('TESTA',2)
     @subscription = Subscription.find(params[:id])
+    Sidekiq::Cron::Job.create( 
+      name: @subscription.vendor+'Worker_'+@subscription.id.to_s, 
+      cron: @subscription.cron, 
+      klass: @subscription.vendor+'Worker',
+      args: [@subscription.id, @subscription.quintly_metric]
+    )
   end
   
   def new

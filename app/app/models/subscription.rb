@@ -10,10 +10,13 @@ class Subscription < ActiveRecord::Base
   validates :email, presence: true, email: true
   validates :vendor, presence: true
   validates :frequency, presence: true
-  
-  def do_job
-    puts '**************** MODEL DO_JOB METHOD'
-  end
     
   scope :quintly, -> { where(vendor: 'Quintly') }
+end
+
+class QuintlyWorker
+  include Sidekiq::Worker  
+  def perform(id)
+    puts '****************** RUNNING QUINTLY TASK NUMBER '+id.to_s
+  end
 end

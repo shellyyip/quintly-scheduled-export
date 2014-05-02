@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  require 'sidekiq/web'
+  require 'sidekiq-cron'
+  mount Sidekiq::Web => '/sidekiq'
+  
   resources :subscriptions
   
   get 'home/index'
