@@ -22,9 +22,9 @@ class SubscriptionsController < ApplicationController
   def create
     @subscription = Subscription.new(subscription_params)
     if @subscription.save #if subscription input validated 
-       if @subscription.vendor == 'Quintly'
-          @subscription.create_quintly_worker(cron: @subscription.cron)
-       end
+      if @subscription.vendor == 'Quintly'
+        @subscription.quintly_worker.build(cron: @subscription.cron)
+      end
       redirect_to @subscription
     else
       render 'new'
@@ -53,6 +53,9 @@ class SubscriptionsController < ApplicationController
   private
     def subscription_params
       params.require(:subscription).permit(:email, :vendor, :frequency, :cron)
+    end
+    def quintlyworker_params
+  params.require(:quintly_worker).permit(:subscription_id, :cron, :quintly_metric, :quintly_period, :quintly_interval, :quintly_profileids)
     end
   
 end
