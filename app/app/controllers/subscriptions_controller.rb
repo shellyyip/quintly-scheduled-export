@@ -7,12 +7,6 @@ class SubscriptionsController < ApplicationController
   
   def show 
     @subscription = Subscription.find(params[:id])
-    # Sidekiq::Cron::Job.create( 
-      # name: @subscription.email+'_'+@subscription.vendor+'Worker_'+@subscription.id.to_s, 
-      # cron: @subscription.cron, 
-      # klass: @subscription.vendor+'Worker',
-      # args: [@subscription.id]
-    # )
   end
   
   def new
@@ -24,11 +18,16 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.new(subscription_params)
     if @subscription.vendor == 'Quintly'
       @subscription.build_quintly_worker(attributes = {
-        #cron: @subscription.cron,
         quintly_metric: @subscription.quintly_worker.quintly_metric
       })
     end
-    if @subscription.save #if subscription input validated 
+    if @subscription.save #if subscription input validated
+      Sidekiq::Cron::Job.create( 
+        name: @subscription.email+'_'+@subscription.vendor+'Worker_'+@subscription.id.to_s, 
+        cron: @subscription.cron, 
+        klass: @subscription.vendor+'Worker',
+        args: [@subscription.id, @subscription.quintly_worker.quintly_metric]
+      ) 
       redirect_to @subscription
     else
       render 'new'
@@ -42,6 +41,13 @@ class SubscriptionsController < ApplicationController
   def update
     @subscription = Subscription.find(params[:id])
     if @subscription.update(subscription_params)
+      Sidekiq::Cron::Job.destroy @subscription.email+'_'+@subscription.vendor+'Worker_'+@subscription.id.to_s
+      Sidekiq::Cron::Job.create( 
+        name: @subscription.email+'_'+@subscription.vendor+'Worker_'+@subscription.id.to_s, 
+        cron: @subscription.cron, 
+        klass: @subscription.vendor+'Worker',
+        args: [@subscription.id, @subscription.quintly_worker.quintly_metric]
+      )
       redirect_to @subscription
     else
       render 'edit'
@@ -56,7 +62,7 @@ class SubscriptionsController < ApplicationController
   
   private
     def subscription_params
-      params.require(:subscription).permit(:email, :vendor, :period, :frequency, :cron, 
+      params.require(:subscription).permit(:email, :vendor, :cron, 
         quintly_worker_attributes: [:quintly_metric]
       )
     end

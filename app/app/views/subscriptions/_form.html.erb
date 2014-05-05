@@ -23,20 +23,21 @@
   </p>
   
   <p>
-    <%= f.label :period %><br>
-    <%= f.select :period, ['7 days', '30 days'] %>
-  </p>
-  
-  <p>
     Frequency: <br>
-    <div id="subscription_frequency"></div>
+    <div id="jquery-cron"></div>
+    <%= f.hidden_field :cron %>
   </p>
   
    <%= f.fields_for :quintly_worker do |q| %> 
 	  <p>
 	    <%= q.label :quintly_metric %><br>
 	    <%= q.select :quintly_metric, ['averageCommentsPerOwnPost', 'averageInteractionsPerOwnPost'] %>
-	  </p>	  
+	  </p>
+	  <p>
+	    <%= q.label :quintly_period %><br>
+	    <%= q.select :quintly_period, ['7 days', '14 days', '30 days'] %>
+	  </p>
+	  	 
 	<% end %>
  
 	<p>

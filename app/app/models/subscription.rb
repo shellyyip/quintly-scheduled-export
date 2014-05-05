@@ -13,7 +13,7 @@ class Subscription < ActiveRecord::Base
     
   validates :email, presence: true, email: true
   validates :vendor, presence: true
-  validates :frequency, presence: true
+  validates :cron, presence: true
     
   scope :quintly, -> { where(vendor: 'Quintly') }
 end

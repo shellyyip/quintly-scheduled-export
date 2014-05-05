@@ -11,11 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140505143651) do
+ActiveRecord::Schema.define(version: 20140505172915) do
 
   create_table "quintly_workers", force: true do |t|
     t.integer  "subscription_id"
-    t.string   "cron"
     t.string   "quintly_metric"
     t.string   "quintly_period"
     t.string   "quintly_interval"
@@ -30,7 +29,6 @@ ActiveRecord::Schema.define(version: 20140505143651) do
     t.string   "email"
     t.string   "vendor",     null: false
     t.string   "period",     null: false
-    t.string   "frequency",  null: false
     t.string   "cron"
     t.datetime "created_at"
     t.datetime "updated_at"
