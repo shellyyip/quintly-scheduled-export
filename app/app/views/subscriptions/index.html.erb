@@ -6,12 +6,20 @@
   <tr>
     <th>Email</th>
     <th>Vendor</th>
+    <th>Period</th>
+    <th>Frequency</th>
+    <th>Cron</th>
+    <th>Quintly Metric</th>
   </tr>
  
   <% @subscriptions.each do |subscription| %>
     <tr>
       <td><%= subscription.email %></td>
       <td><%= subscription.vendor %></td>
+      <td><%= subscription.period %></td>
+      <td><%= subscription.frequency %></td>
+      <td><%= subscription.cron %></td>
+      <td><%= subscription.quintly_worker.quintly_metric %></td>
       <td><%= link_to 'Show', subscription_path(subscription) %></td>
       <td><%= link_to 'Edit', edit_subscription_path(subscription) %></td>
       <td><%= link_to 'Destroy', subscription_path(subscription),

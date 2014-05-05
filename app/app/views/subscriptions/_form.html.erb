@@ -18,19 +18,26 @@
   </p>
   
   <p>
-    Frequency: <br>
-    <%= f.select :frequency, ['DEBUG Every Minute', 'Daily', 'Weekly', 'Monthly'] %>
-  </p>
-  
-  <p>
-    <%= f.label :cron %><br>
-    <%= f.text_field :cron %>
-  </p>
-  
-  <p>
     <%= f.label :vendor %><br>
     <%= f.select :vendor, ['Quintly', 'TESTING: NOT QUINTLY'] %>
   </p>
+  
+  <p>
+    <%= f.label :period %><br>
+    <%= f.select :period, ['7 days', '30 days'] %>
+  </p>
+  
+  <p>
+    Frequency: <br>
+    <%= f.select :frequency, ['DEBUG Every Minute', 'Weekly', 'Monthly'] %>
+  </p>
+  
+   <%= f.fields_for :quintly_worker do |q| %> 
+	  <p>
+	    <%= q.label :quintly_metric %><br>
+	    <%= q.select :quintly_metric, ['averageCommentsPerOwnPost', 'averageInteractionsPerOwnPost'] %>
+	  </p>	  
+	<% end %>
  
 	<p>
     <%= f.submit %>

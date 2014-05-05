@@ -11,6 +11,22 @@
   <strong>Cron Schedule</strong>
   <%= @subscription.cron %>
 </p>
+
+<p>
+  <strong>Period</strong>
+  <%= @subscription.period %>
+</p>
+
+<p>
+  <strong>Frequency</strong>
+  <%= @subscription.frequency %>
+</p>
+
+<p>
+  <strong>Quintly Metric</strong>
+  <%= @subscription.quintly_worker.quintly_metric %>
+</p>
+
 <p><%= link_to 'Edit', edit_subscription_path(@subscription) %></p>
 <p><%= link_to 'Back to All Subscriptions', subscriptions_path %></p>
 

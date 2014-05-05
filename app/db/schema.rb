@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140502172933) do
+ActiveRecord::Schema.define(version: 20140505143651) do
 
   create_table "quintly_workers", force: true do |t|
     t.integer  "subscription_id"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20140502172933) do
   create_table "subscriptions", force: true do |t|
     t.string   "email"
     t.string   "vendor",     null: false
+    t.string   "period",     null: false
     t.string   "frequency",  null: false
     t.string   "cron"
     t.datetime "created_at"
