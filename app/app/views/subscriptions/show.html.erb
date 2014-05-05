@@ -13,13 +13,18 @@
 </p>
 
 <p>
-  <strong>Period</strong>
-  <%= @subscription.period %>
+  <strong>Quintly Period</strong>
+  <%= @subscription.quintly_worker.quintly_period %>
 </p>
 
 <p>
   <strong>Quintly Metric</strong>
   <%= @subscription.quintly_worker.quintly_metric %>
+</p>
+
+<p>
+  <strong>Quintly Interval</strong>
+  <%= @subscription.quintly_worker.quintly_interval %>
 </p>
 
 <p><%= link_to 'Edit', edit_subscription_path(@subscription) %></p>

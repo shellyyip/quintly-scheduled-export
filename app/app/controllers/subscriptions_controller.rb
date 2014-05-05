@@ -13,12 +13,15 @@ class SubscriptionsController < ApplicationController
     @subscription = Subscription.new
     @subscription.build_quintly_worker
   end
-  
+
   def create
     @subscription = Subscription.new(subscription_params)
     if @subscription.vendor == 'Quintly'
       @subscription.build_quintly_worker(attributes = {
-        quintly_metric: @subscription.quintly_worker.quintly_metric
+        quintly_metric: @subscription.quintly_worker.quintly_metric,
+        quintly_period: @subscription.quintly_worker.quintly_period,
+        quintly_interval: @subscription.quintly_worker.quintly_interval,
+        quintly_profileids: @subscription.quintly_worker.quintly_profileids
       })
     end
     if @subscription.save #if subscription input validated
@@ -26,8 +29,8 @@ class SubscriptionsController < ApplicationController
         name: @subscription.email+'_'+@subscription.vendor+'Worker_'+@subscription.id.to_s, 
         cron: @subscription.cron, 
         klass: @subscription.vendor+'Worker',
-        args: [@subscription.id, @subscription.quintly_worker.quintly_metric]
-      ) 
+        args: [@subscription.id, @subscription.quintly_worker.quintly_metric, @subscription.quintly_worker.quintly_period, @subscription.quintly_worker.quintly_interval, @subscription.quintly_worker.quintly_profileids]
+    )
       redirect_to @subscription
     else
       render 'new'
@@ -46,8 +49,8 @@ class SubscriptionsController < ApplicationController
         name: @subscription.email+'_'+@subscription.vendor+'Worker_'+@subscription.id.to_s, 
         cron: @subscription.cron, 
         klass: @subscription.vendor+'Worker',
-        args: [@subscription.id, @subscription.quintly_worker.quintly_metric]
-      )
+        args: [@subscription.id, @subscription.quintly_worker.quintly_metric, @subscription.quintly_worker.quintly_period, @subscription.quintly_worker.quintly_interval, @subscription.quintly_worker.quintly_profileids]
+    )
       redirect_to @subscription
     else
       render 'edit'
@@ -57,13 +60,14 @@ class SubscriptionsController < ApplicationController
   def destroy
     @subscription = Subscription.find(params[:id])
     @subscription.destroy
+    Sidekiq::Cron::Job.destroy @subscription.email+'_'+@subscription.vendor+'Worker_'+@subscription.id.to_s
     redirect_to subscriptions_path
   end
   
   private
     def subscription_params
       params.require(:subscription).permit(:email, :vendor, :cron, 
-        quintly_worker_attributes: [:quintly_metric]
+        quintly_worker_attributes: [:quintly_metric, :quintly_period, :quintly_interval, :quintly_profileids]
       )
     end
   

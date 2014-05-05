@@ -25,6 +25,7 @@
   <p>
     Frequency: <br>
     <div id="jquery-cron"></div>
+    <!--Cron hidden field accepts calculated value from jquery-cron fields-->
     <%= f.hidden_field :cron %>
   </p>
   
@@ -34,8 +35,18 @@
 	    <%= q.select :quintly_metric, ['averageCommentsPerOwnPost', 'averageInteractionsPerOwnPost'] %>
 	  </p>
 	  <p>
-	    <%= q.label :quintly_period %><br>
-	    <%= q.select :quintly_period, ['7 days', '14 days', '30 days'] %>
+	    Give me data for the last 
+	    <%= q.number_field :quintly_period %> days
+	  </p>
+	  <p>
+	    <%= q.label :quintly_interval %><br>
+	    <%= q.select :quintly_interval, ['Daily', 'Weekly', 'Monthly', 'Yearly', 'Total'] %>
+	  </p>
+	  
+	  <p>
+	    <%= q.label :quintly_profileids %><br>
+	    <!--Quintly Profile IDs hidden field accepts calculated value from checkboxes-->
+	    <%= q.text_field :quintly_profileids %>
 	  </p>
 	  	 
 	<% end %>
