@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140505181341) do
+ActiveRecord::Schema.define(version: 20140512152332) do
+
+  create_table "quintly_profiles", force: true do |t|
+    t.integer  "profile_id"
+    t.string   "company"
+    t.string   "profile_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "quintly_workers", force: true do |t|
     t.integer  "subscription_id"

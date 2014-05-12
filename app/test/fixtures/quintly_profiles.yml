@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  quintly_profile_id: 1
+  company: MyString
+  type: 
+
+two:
+  quintly_profile_id: 1
+  company: MyString
+  type: 

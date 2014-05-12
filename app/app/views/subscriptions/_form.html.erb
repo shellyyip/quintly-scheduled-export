@@ -43,6 +43,14 @@
 	    <%= q.select :quintly_interval, ['Daily', 'Weekly', 'Monthly', 'Yearly', 'Total'] %>
 	  </p>
 	  
+	  <p>Quintly Profiles:</p>
+	  <% profiles = QuintlyProfile.all %>
+	  <% profiles.each do |profile| %>
+	  	<% name = profile.company %>
+	  	<% proftype = profile.profile_type %>
+	  	<input type="checkbox" name="<%= name %>" data-quintlyid="<%= profile.profile_id %>"><%= name %> <%= proftype %><br>	  	
+	  <% end %>
+	  
 	  <p>
 	    <%= q.label :quintly_profileids %><br>
 	    <!--Quintly Profile IDs hidden field accepts calculated value from checkboxes-->

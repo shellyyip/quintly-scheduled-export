@@ -5,3 +5,10 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+require 'csv'
+require 'rails'
+
+CSV.foreach(Rails.root.join('lib', 'data', 'quintly-profiles.csv'), :headers => true) do |row|
+  QuintlyProfile.create(row.to_hash())
+end
