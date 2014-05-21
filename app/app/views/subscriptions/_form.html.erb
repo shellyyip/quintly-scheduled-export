@@ -32,7 +32,15 @@
    <%= f.fields_for :quintly_worker do |q| %> 
 	  <p>
 	    <%= q.label :quintly_metric %><br>
-	    <%= q.select :quintly_metric, ['averageCommentsPerOwnPost', 'averageInteractionsPerOwnPost'] %>
+	    
+	    <% File.open('lib/data/quintly-metrics.txt', 'r') do |f| %>
+	    	<% metrics = [] %>
+	    	<% f.each_line do |line| %>
+	    		<% metrics.push(line.split(' ')[0]) %>
+	    	<% end %>
+	    
+	    <%= q.select :quintly_metric, metrics %>
+	    <% end %>
 	  </p>
 	  <p>
 	    Give me data for the last 
