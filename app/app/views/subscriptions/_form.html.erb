@@ -44,11 +44,12 @@
 	  </p>
 	  
 	  <p>Quintly Profiles:</p>
+	  <div id="quintly_profileid_checkboxes">
 	  <% profiles = QuintlyProfile.all %>
 	  <% profiles.each do |profile| %>
 	  	<% name = profile.company %>
 	  	<% proftype = profile.profile_type %>
-	  	<input type="checkbox" name="<%= name %>" data-quintlyid="<%= profile.profile_id %>"><%= name %> <%= proftype %><br>	  	
+	  	<input type="checkbox" class="quintly_profileid" name="<%= name %>" data-quintlyid="<%= profile.profile_id %>"><%= name %> <%= proftype %><br>	  	
 	  <% end %>
 	  
 	  <p>

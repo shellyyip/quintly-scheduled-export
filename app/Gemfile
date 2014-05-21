@@ -13,8 +13,9 @@ gem 'uglifier', '>= 1.3.0'
 # gem 'therubyracer',  platforms: :ruby
 # HTTParty!
 gem 'httparty'
-#json parsing
+# helpers
 gem 'json'
+gem 'underscore-rails'
 
 # Cron/scheduling
 gem 'redis'
